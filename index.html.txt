@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; background: #f4f4f4; }
+        .container { background: white; padding: 30px; border-radius: 8px; width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; color: white; font-weight: bold; margin: 5px; }
+        .btn-green { background-color: #4CAF50; }
+        .btn-red { background-color: #f44336; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .cgpa-display { font-size: 20px; margin: 20px 0; font-weight: bold; }
+        .cgpa-value { color: #4CAF50; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>CGPA Calculator</h2>
+    <label>Subject:</label>
+    <input type="text" id="subject" placeholder="Enter Subject">
+    
+    <label>Grade:</label>
+    <select id="grade">
+        <option value="10">S</option>
+        <option value="9">A</option>
+        <option value="8">B</option>
+        <option value="7">C</option>
+    </select>
+
+    <label>Credit:</label>
+    <input type="number" id="credit" placeholder="Enter Credit">
+
+    <button class="btn btn-green" onclick="addSubject()">Add / Edit Subject</button>
+
+    <h3>Calculate CGPA</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Grade</th>
+                <th>Credit</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="subjectList"></tbody>
+    </table>
+
+    <div class="cgpa-display">CGPA: <span id="cgpaValue" class="cgpa-value">0.00</span></div>
+
+    <button class="btn btn-green" onclick="calculateCGPA()">Calculate CGPA</button>
+    <button class="btn btn-green" onclick="resetForm()">Reset</button>
+</div>
+
+<script>
+    let subjects = [];
+
+    function addSubject() {
+        const name = document.getElementById('subject').value;
+        const gradePoint = parseFloat(document.getElementById('grade').value);
+        const credit = parseFloat(document.getElementById('credit').value);
+
+        if (name && credit) {
+            subjects.push({ name, grade: document.getElementById('grade').selectedOptions[0].text, gradePoint, credit });
+            updateTable();
+        }
+    }
+
+    function updateTable() {
+        const tbody = document.getElementById('subjectList');
+        tbody.innerHTML = '';
+        subjects.forEach((s, index) => {
+            tbody.innerHTML += `<tr>
+                <td>${s.name}</td><td>${s.grade}</td><td>${s.credit}</td>
+                <td>
+                    <button class="btn btn-green" style="padding:5px 10px">Edit</button>
+                    <button class="btn btn-red" style="padding:5px 10px" onclick="deleteSubject(${index})">Delete</button>
+                </td>
+            </tr>`;
+        });
+    }
+
+    function calculateCGPA() {
+        let totalPoints = 0, totalCredits = 0;
+        subjects.forEach(s => {
+            totalPoints += (s.gradePoint * s.credit);
+            totalCredits += s.credit;
+        });
+        document.getElementById('cgpaValue').innerText = totalCredits ? (totalPoints / totalCredits).toFixed(2) : "0.00";
+    }
+
+    function deleteSubject(index) {
+        subjects.splice(index, 1);
+        updateTable();
+    }
+
+    function resetForm() {
+        subjects = [];
+        updateTable();
+        document.getElementById('cgpaValue').innerText = "0.00";
+    }
+</script>
+
+</body>
+</html>
