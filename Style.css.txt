@@ -1,0 +1,23 @@
+/* Container and Layout */
+body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; display: flex; justify-content: center; padding-top: 40px; }
+.card { background: white; padding: 30px; border-radius: 8px; width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+
+/* Form Elements */
+label { display: block; text-align: left; margin: 10px 0 5px; font-weight: 600; color: #555; }
+input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; box-sizing: border-box; }
+
+/* Buttons */
+.btn { padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; transition: 0.3s; }
+.btn-green { background-color: #4CAF50; width: 100%; margin: 15px 0; }
+.btn-green:hover { background-color: #45a049; }
+.action-btn { padding: 6px 12px; margin: 2px; font-size: 12px; }
+.btn-red { background-color: #e57373; }
+
+/* Table Styling */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #eee; }
+th { background-color: #f4f4f4; padding: 12px; text-align: left; font-size: 14px; }
+td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+
+/* CGPA Result */
+.cgpa-display { font-size: 22px; margin: 25px 0; font-weight: bold; }
+.cgpa-value { color: #4CAF50; }
