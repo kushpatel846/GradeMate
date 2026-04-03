@@ -1,0 +1,12 @@
+<h1>GradeMate 🎓</h1>
+
+<!-- INPUT BOX -->
+<input type="number" id="marks" placeholder="Marks enter karo">
+
+<!-- BUTTON -->
+<button onclick="calculateGrade()">Check Grade</button>
+
+<!-- RESULT SHOW -->
+<p id="result"></p>
+
+<script src="script.js"></script>
